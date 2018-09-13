@@ -2,7 +2,7 @@
 domain=${1}
 echo
 echo "---------Direct results, propagation not considered---------"
-ns=$(whois $domain | grep -i "name " | cut -d : -f 2 | awk '{print $1}' | head -1)
+ns=$(whois $domain | grep -i "name server" | cut -d : -f 2 | awk '{print $1}' | head -1)
 echo "Nameserver:"
 echo $ns
 command dig @8.8.8.8 $ns +short
