@@ -5,7 +5,7 @@ echo "---------Direct results, propagation not considered---------"
 ns=$(whois $domain | grep -i "name server" | cut -d : -f 2 | awk '{print $1}' | head -1)
 echo "Nameserver:"
 echo $ns
-command dig @8.8.8.8 $ns +short
+command dig @$ns $ns +short
 echo "A record:"
 command dig @$ns $domain +short
 echo "www:"
@@ -14,6 +14,8 @@ echo "MX:"
 command dig @$ns MX $domain +short
 echo
 echo "---------Propagated records---------"
+echo "Nameserver:"
+command dig @8.8.8.8 $ns +short
 echo "A record:"
 command dig @8.8.8.8 $domain +short
 echo "www:"
